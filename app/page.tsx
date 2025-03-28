@@ -10,54 +10,60 @@ import { SiteHeader } from "@/components/site-header"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <div className="container mx-auto py-6 px-4 md:px-6">
-        <header className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Prompt Library</h1>
-            <p className="text-muted-foreground mt-1">Discover and use powerful prompts for your AI projects</p>
+      <div className="container mx-auto py-8 px-4 md:px-6 lg:px-8">
+        <header className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center justify-between mb-8">
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold tracking-tight mb-2">Prompt Library</h1>
+            <p className="text-lg text-muted-foreground">Discover and use powerful prompts for your AI projects</p>
           </div>
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <div className="relative w-full md:w-[300px] hidden md:block">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder="Search prompts..." className="w-full pl-8" />
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
+            <div className="relative w-full md:w-[300px]">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input 
+                type="search" 
+                placeholder="Search prompts..." 
+                className="w-full pl-10 h-10 bg-background border-border" 
+              />
             </div>
-            <Button asChild>
+            <Button className="w-full sm:w-auto" asChild>
               <Link href="/submit">Submit Prompt</Link>
             </Button>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6">
-          <aside className="hidden md:block">
-            <CategoryFilter />
+        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
+          <aside className="lg:block">
+            <div className="sticky top-8">
+              <CategoryFilter />
+            </div>
           </aside>
 
           <main>
-            <Tabs defaultValue="popular" className="mb-8">
-              <TabsList>
-                <TabsTrigger value="popular">Popular</TabsTrigger>
-                <TabsTrigger value="recent">Recent</TabsTrigger>
-                <TabsTrigger value="favorites">Favorites</TabsTrigger>
+            <Tabs defaultValue="popular" className="w-full">
+              <TabsList className="w-full sm:w-auto flex justify-start border-b mb-6">
+                <TabsTrigger value="popular" className="flex-1 sm:flex-none">Popular</TabsTrigger>
+                <TabsTrigger value="recent" className="flex-1 sm:flex-none">Recent</TabsTrigger>
+                <TabsTrigger value="favorites" className="flex-1 sm:flex-none">Favorites</TabsTrigger>
               </TabsList>
               <TabsContent value="popular" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {popularPrompts.map((prompt) => (
                     <PromptCard key={prompt.id} prompt={prompt} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="recent" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {recentPrompts.map((prompt) => (
                     <PromptCard key={prompt.id} prompt={prompt} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="favorites" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {favoritePrompts.map((prompt) => (
                     <PromptCard key={prompt.id} prompt={prompt} />
                   ))}
