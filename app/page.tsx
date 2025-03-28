@@ -10,66 +10,54 @@ import { SiteHeader } from "@/components/site-header"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="min-h-screen bg-white">
       <SiteHeader />
 
-      <div className="container mx-auto py-8 px-4 md:px-6 lg:px-8">
-        <header className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center justify-between mb-8">
-          <div className="flex-1">
-            <h1 className="text-4xl font-bold tracking-tight mb-2">Prompt Library</h1>
-            <p className="text-lg text-muted-foreground">Discover and use powerful prompts for your AI projects</p>
-          </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
-            <div className="relative w-full md:w-[300px]">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input 
-                type="search" 
-                placeholder="Search prompts..." 
-                className="w-full pl-10 h-10 bg-background border-border" 
-              />
-            </div>
-            <Button className="w-full sm:w-auto" asChild>
-              <Link href="/submit">Submit Prompt</Link>
-            </Button>
-          </div>
-        </header>
+      <div className="max-w-[1400px] mx-auto px-4">
+        <div className="py-8">
+          <h1 className="text-2xl font-bold mb-1">Prompt Library</h1>
+          <p className="text-gray-600">Discover and use powerful prompts for your AI projects</p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8">
-          <aside className="lg:block">
-            <div className="sticky top-8">
+        <div className="flex gap-8">
+          <aside className="w-[280px] shrink-0">
+            <div className="sticky top-4">
+              <h2 className="text-lg font-semibold mb-4">Filters</h2>
               <CategoryFilter />
             </div>
           </aside>
 
-          <main>
-            <Tabs defaultValue="popular" className="w-full">
-              <TabsList className="w-full sm:w-auto flex justify-start border-b mb-6">
-                <TabsTrigger value="popular" className="flex-1 sm:flex-none">Popular</TabsTrigger>
-                <TabsTrigger value="recent" className="flex-1 sm:flex-none">Recent</TabsTrigger>
-                <TabsTrigger value="favorites" className="flex-1 sm:flex-none">Favorites</TabsTrigger>
-              </TabsList>
-              <TabsContent value="popular" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {popularPrompts.map((prompt) => (
-                    <PromptCard key={prompt.id} prompt={prompt} />
-                  ))}
-                </div>
-              </TabsContent>
-              <TabsContent value="recent" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {recentPrompts.map((prompt) => (
-                    <PromptCard key={prompt.id} prompt={prompt} />
-                  ))}
-                </div>
-              </TabsContent>
-              <TabsContent value="favorites" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {favoritePrompts.map((prompt) => (
-                    <PromptCard key={prompt.id} prompt={prompt} />
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
+          <main className="flex-1">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex gap-4">
+                <button className={`px-4 py-2 text-sm font-medium ${true ? 'text-black' : 'text-gray-500'}`}>
+                  Popular
+                </button>
+                <button className={`px-4 py-2 text-sm font-medium text-gray-500`}>
+                  Recent
+                </button>
+                <button className={`px-4 py-2 text-sm font-medium text-gray-500`}>
+                  Favorites
+                </button>
+              </div>
+              <div className="relative w-[300px]">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Input 
+                  type="search" 
+                  placeholder="Search prompts..." 
+                  className="w-full pl-9 h-10 bg-white border border-gray-200 rounded-lg" 
+                />
+              </div>
+              <Button className="bg-black text-white hover:bg-black/90" asChild>
+                <Link href="/submit">Submit Prompt</Link>
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {popularPrompts.map((prompt) => (
+                <PromptCard key={prompt.id} prompt={prompt} />
+              ))}
+            </div>
           </main>
         </div>
       </div>

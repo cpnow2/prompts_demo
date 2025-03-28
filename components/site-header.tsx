@@ -35,133 +35,45 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold">Prompt Library</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
-            <Link
-              href="/"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === "/" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Browse
+    <header className="border-b border-gray-200">
+      <div className="max-w-[1400px] mx-auto px-4">
+        <div className="flex h-14 items-center justify-between">
+          <div className="flex items-center gap-8">
+            <Link href="/" className="font-bold">
+              Prompt Library
             </Link>
-            <Link
-              href="/categories"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === "/categories" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Categories
-            </Link>
-            {user?.role === "admin" && (
+            <nav className="flex items-center space-x-6">
               <Link
-                href="/admin"
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname?.startsWith("/admin") ? "text-foreground" : "text-muted-foreground"
-                }`}
+                href="/"
+                className="text-sm font-medium text-black"
               >
-                Admin
+                Browse
               </Link>
-            )}
-          </nav>
-        </div>
-
-        <div className="flex flex-1 items-center justify-end space-x-2">
-          {!isSearchOpen ? (
-            <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(true)} className="md:hidden">
-              <Search className="h-5 w-5" />
-              <span className="sr-only">Search</span>
-            </Button>
-          ) : (
-            <div className="flex items-center md:hidden">
-              <Input type="search" placeholder="Search prompts..." className="w-full" />
-              <Button variant="ghost" size="icon" onClick={() => setIsSearchOpen(false)} className="ml-2">
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-          )}
-
-          <div className="hidden md:flex relative w-[200px] lg:w-[300px]">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search prompts..." className="w-full pl-8" />
+              <Link
+                href="/categories"
+                className="text-sm font-medium text-gray-500 hover:text-black"
+              >
+                Categories
+              </Link>
+            </nav>
           </div>
 
-          {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/profile">
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                {user.role === "admin" && (
-                  <DropdownMenuItem asChild>
-                    <Link href="/admin">
-                      <UserCog className="mr-2 h-4 w-4" />
-                      <span>Admin Dashboard</span>
-                    </Link>
-                  </DropdownMenuItem>
-                )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut}>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/signin">Sign in</Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/signup">Sign up</Link>
-              </Button>
+          <div className="flex items-center gap-4">
+            <div className="relative w-[200px]">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Input 
+                type="search" 
+                placeholder="Search prompts..." 
+                className="w-full pl-9 h-9 bg-white border border-gray-200 rounded-lg" 
+              />
             </div>
-          )}
-
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <nav className="flex flex-col gap-4">
-                <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
-                  Browse
-                </Link>
-                <Link href="/categories" className="text-sm font-medium transition-colors hover:text-primary">
-                  Categories
-                </Link>
-                {user?.role === "admin" && (
-                  <Link href="/admin" className="text-sm font-medium transition-colors hover:text-primary">
-                    Admin Dashboard
-                  </Link>
-                )}
-                <Link href="/submit" className="text-sm font-medium transition-colors hover:text-primary">
-                  Submit Prompt
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
+            <Button variant="ghost" className="text-gray-500 hover:text-black" asChild>
+              <Link href="/signin">Sign in</Link>
+            </Button>
+            <Button className="bg-black text-white hover:bg-black/90" asChild>
+              <Link href="/signup">Sign up</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </header>
