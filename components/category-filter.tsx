@@ -12,81 +12,57 @@ export function CategoryFilter() {
   const [openTags, setOpenTags] = useState(true)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <h3 className="text-xl font-semibold mb-4">Filters</h3>
         <Button 
           variant="outline" 
-          className="w-full justify-start font-medium hover:bg-secondary transition-colors"
+          className="w-full justify-start text-sm font-medium text-gray-500 hover:text-black border border-gray-200 hover:bg-transparent"
         >
-          <Check className="mr-2 h-4 w-4" />
           Clear Filters
         </Button>
       </div>
 
-      <Collapsible open={openCategories} onOpenChange={setOpenCategories}>
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 hover:text-primary transition-colors">
-          <h3 className="text-sm font-semibold">Categories</h3>
-          <ChevronDown 
-            className={`h-4 w-4 transition-transform duration-200 ${
-              openCategories ? "transform rotate-180" : ""
-            }`} 
-          />
-        </CollapsibleTrigger>
-        <CollapsibleContent className="pt-4 pb-2">
-          <div className="space-y-3">
-            {categories.map((category) => (
-              <div key={category.id} className="flex items-center space-x-3 group">
-                <Checkbox 
-                  id={`category-${category.id}`}
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                />
-                <Label
-                  htmlFor={`category-${category.id}`}
-                  className="text-sm font-medium cursor-pointer flex justify-between w-full group-hover:text-primary transition-colors"
-                >
-                  <span>{category.name}</span>
-                  <span className="text-muted-foreground text-xs bg-secondary px-2 py-0.5 rounded-full">
-                    {category.count}
-                  </span>
-                </Label>
-              </div>
-            ))}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+      <div>
+        <h3 className="text-sm font-medium mb-3">Categories</h3>
+        <div className="space-y-2">
+          {categories.map((category) => (
+            <div key={category.id} className="flex items-center">
+              <Checkbox 
+                id={`category-${category.id}`}
+                className="rounded border-gray-300 text-black focus:ring-black"
+              />
+              <label
+                htmlFor={`category-${category.id}`}
+                className="ml-2 text-sm flex justify-between w-full cursor-pointer group"
+              >
+                <span className="text-gray-700 group-hover:text-black">{category.name}</span>
+                <span className="text-gray-400">{category.count}</span>
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <Collapsible open={openTags} onOpenChange={setOpenTags}>
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 hover:text-primary transition-colors">
-          <h3 className="text-sm font-semibold">Popular Tags</h3>
-          <ChevronDown 
-            className={`h-4 w-4 transition-transform duration-200 ${
-              openTags ? "transform rotate-180" : ""
-            }`} 
-          />
-        </CollapsibleTrigger>
-        <CollapsibleContent className="pt-4 pb-2">
-          <div className="space-y-3">
-            {tags.map((tag) => (
-              <div key={tag.id} className="flex items-center space-x-3 group">
-                <Checkbox 
-                  id={`tag-${tag.id}`}
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                />
-                <Label
-                  htmlFor={`tag-${tag.id}`}
-                  className="text-sm font-medium cursor-pointer flex justify-between w-full group-hover:text-primary transition-colors"
-                >
-                  <span>{tag.name}</span>
-                  <span className="text-muted-foreground text-xs bg-secondary px-2 py-0.5 rounded-full">
-                    {tag.count}
-                  </span>
-                </Label>
-              </div>
-            ))}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+      <div>
+        <h3 className="text-sm font-medium mb-3">Popular Tags</h3>
+        <div className="space-y-2">
+          {tags.map((tag) => (
+            <div key={tag.id} className="flex items-center">
+              <Checkbox 
+                id={`tag-${tag.id}`}
+                className="rounded border-gray-300 text-black focus:ring-black"
+              />
+              <label
+                htmlFor={`tag-${tag.id}`}
+                className="ml-2 text-sm flex justify-between w-full cursor-pointer group"
+              >
+                <span className="text-gray-700 group-hover:text-black">{tag.name}</span>
+                <span className="text-gray-400">{tag.count}</span>
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

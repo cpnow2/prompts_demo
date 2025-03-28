@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Prompt Library",
   description: "Discover and use powerful prompts for your AI projects",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -19,11 +19,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning className="h-full">
+      <body className={`${inter.className} flex min-h-full flex-col antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider>
-            {children}
+            <div className="relative flex min-h-screen flex-col">
+              {children}
+            </div>
             <Toaster />
           </AuthProvider>
         </ThemeProvider>
